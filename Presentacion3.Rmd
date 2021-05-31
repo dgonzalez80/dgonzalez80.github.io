@@ -1,0 +1,22 @@
+---
+title: "Sesión 3"
+subtitle: "Aplicaciones a la enseñanza de la Estadística"
+author: " "
+institute: "Daniel Enrique González Gómez"
+date: "2021"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 16:9
+---
+class: inverse, center, middle
+
+# EN CONSTRUCCION 
+![](img/enconstruccion3.gif)
+
+
+
