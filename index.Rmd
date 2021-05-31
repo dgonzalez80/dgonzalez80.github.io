@@ -1,5 +1,4 @@
 ---
-title: "My Website"
+title: "IV Encuentro Colombiano de Educación Estadística  "
 ---
-
-Hello, Website!
+![](img/afiche.jpeg)

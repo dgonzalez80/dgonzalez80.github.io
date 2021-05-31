@@ -1,8 +1,22 @@
 name: "dgonzalez80"
 navbar:
-  title: "dgonzalez80"
+  title: "Introducción a R"
   left:
     - text: "Home"
+      icon: fa-home
       href: index.html
-    - text: "About"
-      href: about.html
+    - text: "Sesiones"
+      icon: albums-outline
+      menu:
+         - text: "Sesiones"
+         - text: "Presentacion 1"
+           href: Presentacion1.html
+         - text: "Presentacion 2"
+           href: Presentacion2.html
+         - text: "Presentacion 3"
+           href: Presentacion3.html    
+         - text: "Presentacion 4"
+           href: Presentacion4.html
+       
+       
+   

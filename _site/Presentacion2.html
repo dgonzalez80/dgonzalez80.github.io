@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="IV - Encuentro Colombiano de Educación Estadística" />
+    <meta name="date" content="2021-05-31" />
+    <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
+    <link href="site_libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="site_libs/remark-css-0.0.1/ki-fonts.css" rel="stylesheet" />
+    <link href="site_libs/remark-css-0.0.1/duke-blue.css" rel="stylesheet" />
+    <link href="site_libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="site_libs/panelset-0.2.6/panelset.js"></script>
+    <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+    <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+    <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="site_libs/datatables-binding-0.18/datatables.js"></script>
+    <link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introducción a R
+## Aplicaciones a la enseñanza de la Estadística
+### IV - Encuentro Colombiano de Educación Estadística
+### Daniel Enrique González Gómez
+### 2021-05-31
+
+---
+
+
+
+
+# Base de datos
+
+Una base de datos es un conjunto de datos pertenecientes a un mismo contexto y almacenados sistemáticamente para su posterior uso.
+&lt;br/&gt;
+Wikipedia
+
+Una base de datos en estadística es un conjunto de información relacionada con una población organizada en filas y columnas. Las columnas corresponden a las variables y las filas están relacionadas con los individuos u objetos de estudio.
+
+
+Existen repositorio de bases de datos para uso general
+
++ dataset en RStudio
+
++ [Portal Bases de datos abiertos Colombia](https://www.datos.gov.co/)
+
++ [Datos Banco mundial](https://datos.bancomundial.org/)
+
++ [Portal de Datos Abiertos de Esri España](https://opendata.esri.es/)
+
+
+.footnote[[*] Open Data Barometer : https://opendatabarometer.org/4thedition/report/?lang=es]
+---
+# Leer datos
+.pull-left[ 
++ Data set R  : bases de datos al interior de los paquetes de R
++ Utilizando menu de RStudio, datos en DD en formato:
+    + Excel
+    + csv
+    + SPSS
+    + SAS
+    + Stata
+
++ Utilizando funciones en linea de consula
++ De forma automatica con paquete RSocrata
+
+&lt;img src="img/importar2.png" width="400"&gt;
+]
+.pull-right[
+&lt;img src="img/importar.png" width="400"&gt;
+
+
+]
+
+
+---
+### R Dataset 
+
+
+```r
+paquetes=library(help = "datasets")
+head(paquetes$info[[2]])
+```
+
+```
+## [1] "AirPassengers           Monthly Airline Passenger Numbers 1949-1960"   
+## [2] "BJsales                 Sales Data with Leading Indicator"             
+## [3] "BOD                     Biochemical Oxygen Demand"                     
+## [4] "CO2                     Carbon Dioxide Uptake in Grass Plants"         
+## [5] "ChickWeight             Weight versus age of chicks on different diets"
+## [6] "DNase                   Elisa assay of DNase"
+```
+
+```r
+tail(paquetes$info[[2]])
+```
+
+```
+## [1] "                        Trees"                                         
+## [2] "uspop                   Populations Recorded by the US Census"         
+## [3] "volcano                 Topographic Information on Auckland's Maunga"  
+## [4] "                        Whau Volcano"                                  
+## [5] "warpbreaks              The Number of Breaks in Yarn during Weaving"   
+## [6] "women                   Average Heights and Weights for American Women"
+```
+
+https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html
+
+.footnote
+---
+### R Dataset 
+
+
+```r
+data(iris) # dataset de R
+```
+
+
+
+```r
+head(iris) # visualiza las primeras 6 filas de la base
+```
+
+```
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+```
+Datos de iris (de Fisher o Anderson) 
++ longitud y ancho del sépalo 
++ largo y ancho de pétalos
++ especies: setosa,  versicolor y virginica.
+
+**Base de datos estadísticos** : arreglo de filas y columnas (matriz) donde por lo general las columnas representan las variables y las filas los registros de los objetos de estudio
+
+---
+#### Base de datos estudianes Probabilidad y Estadistica 
+
+
+```r
+bd0052 = read_excel("data/bd0052.xlsx",col_types = c("numeric", "numeric", "text", 
+         "numeric", "text", "numeric"))
+DT::datatable(head(bd0052,81),fillContainer = FALSE, options = list(pageLength = 6))
+```
+
+<div id="htmlwidget-5e191c019d294cd80113" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5e191c019d294cd80113">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81"],[4,6,9,10,11,12,14,17,18,20,21,24,27,29,30,32,33,36,66,69,72,77,46,2,3,13,15,16,19,22,23,28,31,35,37,38,39,40,41,42,43,44,45,47,48,49,50,51,52,55,56,57,59,60,61,62,63,65,68,71,75,80,81,73,34,54,58,64,1,5,7,25,76,8,26,53,67,70,74,78,79],[4,6,9,10,11,12,14,17,18,20,21,24,27,29,30,32,33,36,4,7,10,15,10,2,3,13,15,16,19,22,23,28,31,35,1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,19,20,21,23,24,25,26,1,3,6,9,13,18,19,11,34,18,22,2,1,5,7,25,14,8,26,17,5,8,12,16,17],["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","F","F","F","F","B","A","A","A","A","A","A","A","A","A","A","A","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","F","F","F","F","F","F","F","F","A","B","B","F","A","A","A","A","F","A","A","B","F","F","F","F","F"],[3.75,3.47,4.05,3.9,3.55,4.63,4.28,4.02,3.79,3.34,3.5,3.56,4.18,4.58,3.47,3.96,3.59,4.17,3.65,3.56,3.71,4.08,null,3.49,3.85,3.94,4.02,4.02,3.82,3.4,3.51,4.08,4.22,4.71,3.54,4.16,3.6,3.65,4.25,3.61,3.81,4.2,3.37,3.42,4.02,4.83,3.59,3.91,3.55,4.5,4.26,3.54,3.35,4.24,3.86,3.65,4.24,4.21,3.57,3.98,3.36,3.53,4.33,4,3.42,3.51,3.69,4.47,4.18,3.69,4.29,3.84,3.42,4.03,3.65,3.46,4.12,3.73,4.16,3.49,4.07],["Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Biología","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería Civil","Ingeniería de Sistemas","Ingeniería de Sistemas","Ingeniería de Sistemas","Ingeniería de Sistemas","Ingeniería Electrónica","Ingeniería Electrónica","Ingeniería Electrónica","Ingeniería Electrónica","Ingeniería Electrónica","Ingeniería Mecánica","Ingeniería Mecánica","Ingeniería Mecánica","Ingeniería Mecánica","Negocios Internacionales","Negocios Internacionales","Negocios Internacionales","Negocios Internacionales"],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>idgrup<\/th>\n      <th>grupo<\/th>\n      <th>promacum<\/th>\n      <th>carrera<\/th>\n      <th>matriculada<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"columnDefs":[{"className":"dt-right","targets":[1,2,4,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+
+```r
+library(readr)
+data=read_csv("data/spi_global_rankings_intl.csv")
+DT::datatable(head(data,218),fillContainer = FALSE, options = list(pageLength = 6))
+```
+
+<div id="htmlwidget-80ced4a66ac8585df87a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-80ced4a66ac8585df87a">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218],["Spain","Brazil","Belgium","France","England","Argentina","Portugal","Netherlands","Germany","Italy","Switzerland","Uruguay","Colombia","Denmark","Mexico","Chile","Croatia","Austria","Ecuador","Serbia","USA","Russia","Sweden","Poland","Czech Republic","Algeria","Venezuela","Peru","Iran","Morocco","Paraguay","Senegal","Japan","Wales","Norway","Turkey","Australia","Ghana","Romania","Ukraine","Greece","Tunisia","Ivory Coast","South Korea","Bosnia and Herzegovina","Egypt","Qatar","Hungary","Canada","Scotland","Israel","Basque Country","Slovenia","Uganda","Mali","Nigeria","Finland","Iraq","Costa Rica","Zimbabwe","Burkina Faso","Northern Ireland","Iceland","Rep of Ireland","Slovakia","Honduras","Bolivia","Uzbekistan","Saudi Arabia","Panama","Cameroon","Georgia","Albania","Haiti","Bahrain","Montenegro","China PR","Belarus","FYR Macedonia","Benin","Kosovo","Zambia","Bulgaria","Guinea","Namibia","Congo","South Africa","Jamaica","Gabon","Congo DR","Libya","Armenia","Togo","Tanzania","Guatemala","Kenya","New Zealand","Angola","Jordan","Cape Verde Islands","Madagascar","Curacao","El Salvador","Oman","Equatorial Guinea","Gambia","Malawi","Botswana","Luxembourg","Mozambique","Syria","Liberia","Kuwait","Sudan","Mauritania","United Arab Emirates","Trinidad and Tobago","Niger","Azerbaijan","Cuba","Kazakhstan","Rwanda","Lithuania","Cyprus","Estonia","Burundi","Sierra Leone","Bermuda","St. Kitts and Nevis","Lesotho","Comoros","Lebanon","Ethiopia","Guinea-Bissau","Vietnam","Nicaragua","Latvia","Dominican Republic","Palestine","Thailand","Central African Republic","North Korea","Moldova","Kyrgyzstan","Faroe Islands","Turkmenistan","Chad","Fiji","Martinique","Guyana","Belize","Suriname","Antigua and Barbuda","South Sudan","Solomon Islands","Zanzibar","Puerto Rico","New Caledonia","Malaysia","Malta","Barbados","Dominica","Swaziland","Eritrea","Tahiti","Philippines","India","Tajikistan","Singapore","Sao Tome and Principe","St. Vincent and the Grenadines","Hong Kong","Grenada","Vanuatu","Mauritius","St. Lucia","Yemen","Liechtenstein","Gibraltar","Afghanistan","Aruba","Djibouti","Indonesia","Myanmar","Andorra","Montserrat","Cayman Islands","Papua New Guinea","Somalia","Bahamas","Seychelles","Maldives","Bangladesh","French Guiana","Nepal","Mongolia","Chinese Taipei","San Marino","British Virgin Islands","Bonaire","Cambodia","Turks and Caicos Islands","Guam","Guadeloupe","Anguilla","Brunei","US Virgin Islands","Sri Lanka","Pakistan","Laos","Bhutan","St. Martin","Sint Maarten","Tuvalu","Timor-Leste","Macau","Samoa","Tonga"],["UEFA","CONMEBOL","UEFA","UEFA","UEFA","CONMEBOL","UEFA","UEFA","UEFA","UEFA","UEFA","CONMEBOL","CONMEBOL","UEFA","CONCACAF","CONMEBOL","UEFA","UEFA","CONMEBOL","UEFA","CONCACAF","UEFA","UEFA","UEFA","UEFA","CAF","CONMEBOL","CONMEBOL","AFC","CAF","CONMEBOL","CAF","AFC","UEFA","UEFA","UEFA","AFC","CAF","UEFA","UEFA","UEFA","CAF","CAF","AFC","UEFA","CAF","AFC","UEFA","CONCACAF","UEFA","UEFA","UEFA","UEFA","CAF","CAF","CAF","UEFA","AFC","CONCACAF","CAF","CAF","UEFA","UEFA","UEFA","UEFA","CONCACAF","CONMEBOL","AFC","AFC","CONCACAF","CAF","UEFA","UEFA","CONCACAF","AFC","UEFA","AFC","UEFA","UEFA","CAF","UEFA","CAF","UEFA","CAF","CAF","CAF","CAF","CONCACAF","CAF","CAF","CAF","UEFA","CAF","CAF","CONCACAF","CAF","OFC","CAF","AFC","CAF","CAF","CONCACAF","CONCACAF","AFC","CAF","CAF","CAF","CAF","UEFA","CAF","AFC","CAF","AFC","CAF","CAF","AFC","CONCACAF","CAF","UEFA","CONCACAF","UEFA","CAF","UEFA","UEFA","UEFA","CAF","CAF","CONCACAF","CONCACAF","CAF","CAF","AFC","CAF","CAF","AFC","CONCACAF","UEFA","CONCACAF","AFC","AFC","CAF","AFC","UEFA","AFC","UEFA","AFC","CAF","OFC","CONCACAF","CONCACAF","CONCACAF","CONCACAF","CONCACAF","CAF","OFC","CAF","CONCACAF","OFC","AFC","UEFA","CONCACAF","CONCACAF","CAF","CAF","OFC","AFC","AFC","AFC","AFC","CAF","CONCACAF","AFC","CONCACAF","OFC","CAF","CONCACAF","AFC","UEFA","UEFA","AFC","CONCACAF","CAF","AFC","AFC","UEFA","CONCACAF","CONCACAF","OFC","CAF","CONCACAF","CAF","AFC","AFC","CONCACAF","AFC","AFC","AFC","UEFA","CONCACAF","CONCACAF","AFC","CONCACAF","AFC","CONCACAF","CONCACAF","AFC","CONCACAF","AFC","AFC","AFC","AFC","CONCACAF","CONCACAF","OFC","AFC","AFC","OFC","OFC"],[3.54,3.04,2.96,2.9,2.7,2.54,2.7,2.69,3.04,2.52,2.52,2.36,2.17,2.12,2.34,2.22,2.42,2.11,2.24,2.08,2.04,2.18,1.97,1.92,1.96,2.03,1.87,1.89,1.78,2.04,1.8,1.65,1.86,1.65,1.99,1.88,1.92,1.54,1.88,1.67,1.5,1.56,1.62,1.51,1.74,1.55,1.75,1.54,1.82,1.46,1.72,1.63,1.4,1.58,1.26,1.77,1.61,1.39,1.49,1.6,1.38,1.37,1.52,1.26,1.53,1.56,1.57,1.47,1.56,1.3,1.19,1.27,1.32,1.47,1.24,1.23,1.2,1.34,1.3,1.14,1.33,1.46,1.2,1.27,0.96,1.13,1.35,1.32,1.16,1.28,1.24,1.48,1.32,1.21,1.25,1.11,1.26,1.07,0.93,1.04,1.3,1.29,1.05,1.08,1.06,1.18,0.66,0.77,1.12,1.12,1.36,1.05,1.05,0.96,1,1.04,1.09,1.05,0.82,0.89,0.98,0.69,1.03,1.01,0.88,0.88,1.08,1.19,1.15,0.79,1,0.62,0.84,0.9,0.68,0.88,0.92,1.01,0.78,0.9,1.03,0.87,0.76,0.85,0.86,0.87,0.85,0.67,0.94,1.13,0.79,0.76,1.09,0.73,0.69,0.49,0.73,0.69,0.76,0.7,0.54,0.55,0.56,0.79,0.81,0.72,0.54,0.71,0.65,0.79,0.7,0.34,0.68,0.64,0.7,0.64,0.51,0.6,0.49,0.53,0.64,0.64,0.62,0.57,0.28,0.81,0.4,0.6,0.55,0.73,0.41,0.41,0.26,0.52,0.21,0.25,0.45,0.24,0.42,0.37,0.28,0.68,0.51,0.2,0.35,0.21,0.38,0.2,0.2,0.21,0.22,0.23,0.21,0.38,0.33,0.2,0.2,0.2],[0.39,0.32,0.58,0.55,0.45,0.42,0.52,0.53,0.73,0.44,0.62,0.56,0.54,0.58,0.73,0.72,0.86,0.69,0.79,0.77,0.74,0.85,0.74,0.72,0.76,0.81,0.74,0.77,0.7,0.92,0.73,0.62,0.78,0.64,0.91,0.86,0.9,0.66,1,0.82,0.7,0.78,0.85,0.8,1.01,0.88,1.09,0.91,1.16,0.84,1.08,1,0.82,0.98,0.69,1.15,1.03,0.84,0.93,1.06,0.89,0.92,1.06,0.82,1.14,1.2,1.22,1.13,1.24,1,0.89,1,1.06,1.23,1,1.04,1.02,1.16,1.13,0.97,1.2,1.34,1.07,1.15,0.82,1,1.24,1.21,1.04,1.18,1.17,1.49,1.32,1.2,1.27,1.12,1.3,1.14,0.99,1.15,1.44,1.47,1.2,1.24,1.26,1.41,0.85,0.99,1.44,1.45,1.74,1.37,1.37,1.29,1.34,1.43,1.5,1.47,1.22,1.31,1.44,1.06,1.53,1.51,1.35,1.37,1.65,1.82,1.76,1.3,1.6,1.09,1.4,1.49,1.19,1.5,1.59,1.73,1.42,1.59,1.79,1.59,1.45,1.62,1.65,1.73,1.71,1.45,1.85,2.22,1.73,1.71,2.2,1.74,1.71,1.47,1.89,1.85,1.98,1.88,1.61,1.65,1.67,2.1,2.15,2.02,1.82,2.13,2.05,2.38,2.23,1.57,2.22,2.17,2.31,2.24,2.09,2.27,2.08,2.46,2.76,2.85,2.83,2.71,2.09,3.24,2.41,2.88,2.8,3.44,2.8,2.81,2.48,3.18,2.47,2.72,3.48,2.9,3.62,3.59,3.35,4.76,4.42,3.49,4.08,3.71,4.38,3.81,3.92,4.11,4.62,4.89,4.93,5.62,5.56,5.11,5.78,6.08],[93.99,92.22,87.71,87.64,87.44,86.59,86.2,86.07,86.05,86.04,82.57,81.8,79.63,78.1,77.92,76.47,76.37,75.41,75.28,73.37,73.19,73.07,72.21,71.67,71.49,71.42,70.38,69.91,69.77,69.26,69.26,69.2,69.17,68.73,68.56,67.81,67.34,66.08,64.55,64.53,64.12,63.55,62.71,61.9,61.29,60.6,59.93,59.84,59.71,59.71,59.39,59.32,58.87,58.85,58.82,58.73,58.39,58.09,58.04,57.58,56.74,55.7,55.68,55.62,54.08,53.21,53.13,52.97,52.47,52.02,51.99,51.42,51.04,50.56,50.49,49.31,49.21,49.19,48.8,48.62,48.1,48.09,48,48,47.83,47.82,47.7,47.69,47.6,47.34,46.61,45.34,45.31,45.28,44.7,44.4,44.18,42.82,42.64,42.17,42.16,41.53,41.27,41.19,40.12,40.04,38.22,38.1,38.03,37.79,37.65,37.46,37.45,36.91,36.91,36.24,35.92,35.69,34.73,34.58,34.35,34.3,34.08,33.86,33.74,33.29,32.95,32.69,32.67,32.21,32.05,31.7,31.68,31.61,31.55,30.87,30.44,30.13,29.82,29.77,29.55,28.99,28.87,28.08,27.7,26.68,26.54,26.35,26.34,25.06,24.84,24.52,24.48,23.16,22.71,21.39,21.11,20.92,20.71,20.58,20.53,20.29,20.28,19.77,19.56,19.31,17.9,17.67,17.47,16.48,16.4,16.04,16.04,15.99,15.5,15.12,14.29,14.03,13.79,11.07,10.68,10.03,9.93,9.91,9.71,9.65,9.43,9.16,8.97,7.5,7.04,7.01,6.73,6.57,6.12,5.41,4.58,4.55,3.88,3.5,3.44,2.75,2.48,2.47,2.29,2.13,1.93,1.87,1.71,1.48,0.98,0.81,0.74,0.7,0.64,0.6,0.34,0.26]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>rank<\/th>\n      <th>name<\/th>\n      <th>confed<\/th>\n      <th>off<\/th>\n      <th>def<\/th>\n      <th>spi<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"columnDefs":[{"className":"dt-right","targets":[1,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+.footnote[[*]https://data.fivethirtyeight.com/#soccer-spi]
+---
+## Importar datos de manera automatica
+
+La API de datos abiertos de Socrata le permite acceder mediante programación a una gran cantidad de recursos de datos abiertos de gobiernos, organizaciones sin fines de lucro y ONG de todo el mundo. Haga clic en el enlace de abajo y pruebe un ejemplo en vivo ahora mismo.
+
+https://dev.socrata.com/
+
+Cargar la base de datos de COVID-19 Colombia
+
+
+```r
+# install.packages("RSocrata")  # instal paquete RSocrata
+ library(RSocrata)
+ token ="ew2rEMuESuzWPqMkyPfOSGJgE"
+ Colombia= read.socrata("https://www.datos.gov.co/resource/gt2j-8ykr.json", app_token = token)
+ saveRDS(Colombia,"Colombia.RDS")
+```
+
+https://www.datos.gov.co/
+https://dev.socrata.com/foundry/www.datos.gov.co/gt2j-8ykr
+
+.footnote[[*] Se requiere solicitar token en la página de los datos - 
+ RDS formato de R para almacenar cualquier objeto - se lee con readRDS ]
+
+---
+# Etapas del proceso de datos
+&lt;img src="img/proceso_datos.png" width="800"&gt;
+
+.footnote[[*] Imagen tomada de : https://bitsandbricks.github.io/ciencia_de_datos_gente_sociable/]
+---
+## Ordenar los datos
+
+Es importante después de haber importado la base de datos, hacer una revisión de cada una de las variables con el fin de poder detectar:
+
++ Datos faltantes (NA)
+
++ Datos anómalos o raros
+
+
++ Etiquetas mal colocadas ( minúsculas, MAYÚSCULAS, Titulo...)
+
+```r
+&gt; table(Colombia$ubicacion)
+
+        casa         Casa         CASA    Fallecido     Hospital Hospital UCI          N/A 
+       11012      3121567            7        85207        14568         4284        12788 
+```
+
+
+```r
+      f       F       m       M 
+      3 1688878       2 1560550 
+```
+
+---
+
+## Arreglo de la base de datos
+
+
+```r
+library(stringr)
+Colombia$sexo=str_to_lower(Colombia$sexo)
+Colombia$estado[Colombia$estado=="N/A"]="NA"
+Colombia$estado=str_to_lower(Colombia$estado)
+
+Colombia$recuperado[Colombia$recuperado=="N/A"]="NA"
+Colombia$recuperado=str_to_lower(Colombia$recuperado)
+
+Colombia$fuente_tipo_contagio[Colombia$fuente_tipo_contagio=="N/A"]="NA"
+Colombia$fuente_tipo_contagio=str_to_lower(Colombia$fuente_tipo_contagio)
+
+Colombia$ubicacion[Colombia$ubicacion=="N/A"]="NA"
+Colombia$ubicacion=str_to_lower(Colombia$ubicacion)
+```
+---
+class: inverse
+background-image: url("img/tablero1.jpg")
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+## Indicadores
+---
+## Tablas de frecuencia
+
+```r
+table(bd0052$carrera) 
+```
+
+```
+## 
+##                 Biología         Ingeniería Civil   Ingeniería de Sistemas   Ingeniería Electrónica 
+##                       23                       41                        4                        5 
+##      Ingeniería Mecánica Negocios Internacionales 
+##                        4                        4
+```
+
+
+```r
+data.frame(table(bd0052$carrera)) 
+```
+
+```
+##                       Var1 Freq
+## 1                 Biología   23
+## 2         Ingeniería Civil   41
+## 3   Ingeniería de Sistemas    4
+## 4   Ingeniería Electrónica    5
+## 5      Ingeniería Mecánica    4
+## 6 Negocios Internacionales    4
+```
+
+---
+
+
+```r
+t1=summarytools::freq(bd0052$carrera, cumul = FALSE, headings = FALSE)
+t1
+```
+
+```
+## 
+##                                  Freq   % Valid   % Total
+## ------------------------------ ------ --------- ---------
+##                       Biología     23     28.40     28.40
+##               Ingeniería Civil     41     50.62     50.62
+##         Ingeniería de Sistemas      4      4.94      4.94
+##         Ingeniería Electrónica      5      6.17      6.17
+##            Ingeniería Mecánica      4      4.94      4.94
+##       Negocios Internacionales      4      4.94      4.94
+##                           &lt;NA&gt;      0                0.00
+##                          Total     81    100.00    100.00
+```
+---
+
+
+```r
+library(agricolae)
+h2=with(bd0052,graph.freq(promacum,plot=FALSE))
+t2=table.freq(h2)
+colnames(t2) = c("  LI  ", "  LS  ", "marca clase", "Frec.Abs","Frec.Rel", "Frec.Abs.Ac","Frec.Rel.Ac")
+t2
+```
+
+```
+##     LI     LS   marca clase Frec.Abs Frec.Rel Frec.Abs.Ac Frec.Rel.Ac
+## 1   3.30   3.53       3.415       16     20.0          16        20.0
+## 2   3.53   3.76       3.645       21     26.2          37        46.2
+## 3   3.76   3.99       3.875       11     13.8          48        60.0
+## 4   3.99   4.22       4.105       19     23.8          67        83.8
+## 5   4.22   4.45       4.335        7      8.8          74        92.5
+## 6   4.45   4.68       4.565        4      5.0          78        97.5
+## 7   4.68   4.91       4.795        2      2.5          80       100.0
+```
+
+---
+.pull-left[
+
+```r
+summarytools::descr(mtcars$mpg)
+```
+
+```
+## Descriptive Statistics  
+## value  
+## N: 32  
+## 
+##                      value
+## ----------------- --------
+##              Mean    20.09
+##           Std.Dev     6.03
+##               Min    10.40
+##                Q1    15.35
+##            Median    19.20
+##                Q3    22.80
+##               Max    33.90
+##               MAD     5.41
+##               IQR     7.38
+##                CV     0.30
+##          Skewness     0.61
+##       SE.Skewness     0.41
+##          Kurtosis    -0.37
+##           N.Valid    32.00
+##         Pct.Valid   100.00
+```
+]
+.pull-right[
+
+```r
+summarytools::descr(bd0052$promacum)
+```
+
+```
+## Descriptive Statistics  
+## value  
+## N: 81  
+## 
+##                     value
+## ----------------- -------
+##              Mean    3.86
+##           Std.Dev    0.36
+##               Min    3.34
+##                Q1    3.55
+##            Median    3.83
+##                Q3    4.16
+##               Max    4.83
+##               MAD    0.43
+##               IQR    0.61
+##                CV    0.09
+##          Skewness    0.50
+##       SE.Skewness    0.27
+##          Kurtosis   -0.58
+##           N.Valid   80.00
+##         Pct.Valid   98.77
+```
+]
+---
+class: inverse, center, middle
+# Visualización 
+---
+## Gráficos variables cualitativas con R base
+
+.panelset[
+.panel[.panel-name[Gráfico de tortas]
+
+
+```r
+cc=c(20, 10, 20, 20, 20, 20, 20, 20, 20, 30, 20, 20, 20, 10, 30, 20, 20, 30, 20, 30, 30, 20, 10, 30, 20, 20, 30, 30, 10, 20, 10, 20, 20, 20, 10, 20, 10, 20, 20, 30, 30, 30, 10, 30, 20, 20, 20, 20, 20, 20, 10, 20, 30, 30, 10, 10, 10, 20, 10, 20, 10, 30, 20, 10, 20, 30, 10, 30, 30, 30, 20, 30, 30, 30, 30, 30, 30, 20, 10, 30, 10, 20, 20, 10, 20, 20, 20, 20, 10, 20); labs=c("Ing. Industrial","Administración ","Contaduría "); pct=round(table(cc)/sum(table(cc))*100); labs=paste(labs, pct);labs=paste(labs, "%", sep = " ") 
+pie(table(cc), labels=labs, main=" Distribución por carrera")
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-17-1.png" width="100%" /&gt;
+]
+.panel[.panel-name[Diagrama de barras]
+
+```r
+ev=table(rbinom(90,5,0.80)); 
+barplot(ev, col=c("red","yellow","orange","green","blue"), main = "Evaluación proceso de inducción")
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-18-1.png" width="100%" /&gt;
+]
+  
+.panel[.panel-name[Diag. de barras dos variables]
+
+```r
+counts= table(mtcars$vs, mtcars$gear); rownames(counts)=c("Montor en linea", "Motor en V")
+barplot(counts, main="Número de cambios adelante por Tipo de motor",  xlab="Número de cambios adelante ",col=c("dodgerblue3","orange"),
+  legend = rownames(counts))
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
+]  
+]
+---
+### Gráficas variables cuantitativas con R base
+
+
+.panelset[
+.panel[.panel-name[Diag.de arbol]
+
+```r
+nf=c(4.1, 2.7, 3.1, 3.2, 3.0, 3.2, 2.0, 2.4, 1.6, 3.2, 3.1, 2.6, 2.0, 2.4, 2.8, 3.3, 4.0, 3.4, 3.0, 3.1, 2.7, 2.7, 3.0, 3.8, 3.2, 2.2, 3.5, 3.5, 3.8, 3.5, 3.9, 4.2, 4.3, 3.9, 3.2, 3.5, 3.5, 3.7, 4.1, 3.7, 3.5, 3.6, 3.2, 3.1, 3.4, 3.0, 3.0, 3.0, 2.7, 1.7, 3.6, 2.1, 2.4, 3.0, 3.1, 2.5, 2.5, 3.6, 2.2, 2.4, 3.1, 3.3, 2.7, 3.7, 3.0, 2.7, 3.0, 3.2, 3.1, 2.4, 3.0, 2.7, 2.5, 3.0, 3.0, 3.0, 3.2, 3.1, 3.8, 4.1, 3.7, 3.5, 3.0, 3.7, 3.7, 4.1, 3.7, 3.9, 3.7, 2.0)
+stem(nf)
+```
+
+```
+## 
+##   The decimal point is at the |
+## 
+##   1 | 67
+##   2 | 00012244444
+##   2 | 555677777778
+##   3 | 0000000000000011111111222222223344
+##   3 | 555555566677777777888999
+##   4 | 0111123
+```
+]
+  .panel[.panel-name[Histograma]
+
+```r
+h1=hist(nf, main = "Nota final matemáticas fundamentales", xlab = "nota", ylab="frecuencias absolutas", labels=TRUE, col="dodgerblue3", ylim = c(0,30))
+abline(v=3,col="red")
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-22-1.png" width="100%" /&gt;
+  ]
+
+.panel[.panel-name[Diag.de Densidad]
+
+```r
+nf=c(4.1, 2.7, 3.1, 3.2, 3.0, 3.2, 2.0, 2.4, 1.6, 3.2, 3.1, 2.6, 2.0, 2.4, 2.8, 3.3, 4.0, 3.4, 3.0, 3.1, 2.7, 2.7, 3.0, 3.8, 3.2, 2.2, 3.5, 3.5, 3.8, 3.5, 3.9, 4.2, 4.3, 3.9, 3.2, 3.5, 3.5, 3.7, 4.1, 3.7, 3.5, 3.6, 3.2, 3.1, 3.4, 3.0, 3.0, 3.0, 2.7, 1.7, 3.6, 2.1, 2.4, 3.0, 3.1, 2.5, 2.5, 3.6, 2.2, 2.4, 3.1, 3.3, 2.7, 3.7, 3.0, 2.7, 3.0, 3.2, 3.1, 2.4, 3.0, 2.7, 2.5, 3.0, 3.0, 3.0, 3.2, 3.1, 3.8, 4.1, 3.7, 3.5, 3.0, 3.7, 3.7, 4.1, 3.7, 3.9, 3.7, 2.0)
+plot(density(nf), main="Distribución de las notas de matematias fundamentales", col="dodgerblue3")
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-23-1.png" width="100%" /&gt;
+  ]
+  
+.panel[.panel-name[Diag.de Cajas]
+
+```r
+nf=c(4.1, 2.7, 3.1, 3.2, 3.0, 3.2, 2.0, 2.4, 1.6, 3.2, 3.1, 2.6, 2.0, 2.4, 2.8, 3.3, 4.0, 3.4, 3.0, 3.1, 2.7, 2.7, 3.0, 3.8, 3.2, 2.2, 3.5, 3.5, 3.8, 3.5, 3.9, 4.2, 4.3, 3.9, 3.2, 3.5, 3.5, 3.7, 4.1, 3.7, 3.5, 3.6, 3.2, 3.1, 3.4, 3.0, 3.0, 3.0, 2.7, 1.7, 3.6, 2.1, 2.4, 3.0, 3.1, 2.5, 2.5, 3.6, 2.2, 2.4, 3.1, 3.3, 2.7, 3.7, 3.0, 2.7, 3.0, 3.2, 3.1, 2.4, 3.0, 2.7, 2.5, 3.0, 3.0, 3.0, 3.2, 3.1, 3.8, 4.1, 3.7, 3.5, 3.0, 3.7, 3.7, 4.1, 3.7, 3.9, 3.7, 2.0)
+boxplot(nf, main="Nota final matemáticas fundamentales",col="dodgerblue3")
+abline(h=3, col="red")
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-24-1.png" width="100%" /&gt;
+  ]  
+  
+.panel[.panel-name[Diag.de cajas~factor]
+
+```r
+nf=c(4.1, 2.7, 3.1, 3.2, 3.0, 3.2, 2.0, 2.4, 1.6, 3.2, 3.1, 2.6, 2.0, 2.4, 2.8, 3.3, 4.0, 3.4, 3.0, 3.1, 2.7, 2.7, 3.0, 3.8, 3.2, 2.2, 3.5, 3.5, 3.8, 3.5, 3.9, 4.2, 4.3, 3.9, 3.2, 3.5, 3.5, 3.7, 4.1, 3.7, 3.5, 3.6, 3.2, 3.1, 3.4, 3.0, 3.0, 3.0, 2.7, 1.7, 3.6, 2.1, 2.4, 3.0, 3.1, 2.5, 2.5, 3.6, 2.2, 2.4, 3.1, 3.3, 2.7, 3.7, 3.0, 2.7, 3.0, 3.2, 3.1, 2.4, 3.0, 2.7, 2.5, 3.0, 3.0, 3.0, 3.2, 3.1, 3.8, 4.1, 3.7, 3.5, 3.0, 3.7, 3.7, 4.1, 3.7, 3.9, 3.7, 2.0)
+cc=c(20, 10, 20, 20, 20, 20, 20, 20, 20, 30, 20, 20, 20, 10, 30, 20, 20, 30, 20, 30, 30, 20, 10, 30, 20, 20, 30, 30, 10, 20, 10, 20, 20, 20, 10, 20, 10, 20, 20, 30, 30, 30, 10, 30, 20, 20, 20, 20, 20, 20, 10, 20, 30, 30, 10, 10, 10, 20, 10, 20, 10, 30, 20, 10, 20, 30, 10, 30, 30, 30, 20, 30, 30, 30, 30, 30, 30, 20, 10, 30, 10, 20, 20, 10, 20, 20, 20, 20, 10, 20)
+labs=c("Ing. Industrial","Administración ","Contaduría ")
+boxplot((nf~cc),main="Nota final matemáticas fundamentales por carrera", col="dodgerblue3"); abline(h=3, col="red"); abline(h=4, col="blue")
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-25-1.png" width="100%" /&gt;
+  ]  
+.panel[.panel-name[Diag.de Dispersión]
+
+```r
+ed=round(rnorm(90,18,1),1)
+plot(ed,nf, main="Edad vs Nota final matemáticas fundamentales", ylim = c(0,5), xlab = "Edad", ylab = "Nota final",col="dodgerblue3",pch=19)
+grid()
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-26-1.png" width="100%" /&gt;
+  ]  
+  
+.panel[.panel-name[Series de tiempo]
+
+```r
+plot(AirPassengers, main="Numero de pasajeros por mes", col="dodgerblue3", lwd = 2)
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-27-1.png" width="100%" /&gt;
+  ]
+.panel[.panel-name[Resumen]
+
+
+```r
+x=rnorm(100,100,20)
+y=rnorm(100,100,25)
+z=rbinom(100,4,0.30)
+t=1:100
+par(mfrow=c(1, 5))
+pie(table(z))
+barplot(table(z))
+stem(x)
+hist(x)
+boxplot(x)
+plot(x,y)
+plot(t,y, type="l")
+plot(density(x))
+```
+
+]  
+]
+---
+## ggplot2
+&lt;img src="img/ggplot2.png" width="50"&gt;
+
+
+```r
+library(ggplot2)
+ggplot(bd0052, aes(x=promacum, y=grupo)) +
+  geom_boxplot(fill="#313ae8",              # color de relleno
+               color="#bf6f2e",             # color de lineas
+               alpha=0.5)+
+  geom_point(color="#b431e8",alpha=0.9) 
+```
+
+&lt;img src="Presentacion2_files/figure-html/unnamed-chunk-29-1.png" width="100%" /&gt;
+---
+## highcharter
+&lt;img src="img/highcharter.png" width="50"&gt;
+
+https://jkunst.com/highcharter/
+
+https://rstudio-pubs-static.s3.amazonaws.com/320413_6ab300527e8548b1a3cbd0d4c6200fcc.html
+
+---
+## plotly
+
+&lt;img src="img/plotly.png" width="50"&gt;
+
+https://plotly.com/r/
+
+https://plotly-r.com/
+---
+## Shiny
+
+&lt;img src="img/shiny.png" width="50"&gt;
+
++ [Genoma humano](https://shiny.rstudio.com/gallery/genome-browser.html)
+
++ [Paquetes de R](https://gallery.shinyapps.io/087-crandash/)
+
++ [Galeria](https://shiny.rstudio.com/gallery/)
+
+---
+class: inverse, center, middle
+
+# Práctica 
+
+https://github.com/dgonzalez80/ACEdEstad2021/blob/main/codigoR/codigo2.R
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highighStyle": "github",
+"highlighLine": true,
+"countIncrementalSlides": true,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
