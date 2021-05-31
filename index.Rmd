@@ -1,4 +1,4 @@
 ---
-title: "IV Encuentro Colombiano de Educación Estadística  "
+title: "IV Encuentro Colombiano de Educación Estadística"
 ---
 ![](img/afiche.jpeg)
