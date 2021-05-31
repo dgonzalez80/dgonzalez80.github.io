@@ -1,0 +1,8 @@
+name: "dgonzalez80"
+navbar:
+  title: "dgonzalez80"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
