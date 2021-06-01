@@ -1,38 +1,155 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Sesión 4</title>
+    <title>Introducción a R</title>
     <meta charset="utf-8" />
+    <meta name="author" content="apoyo a labores de docencia e investigación" />
     <meta name="date" content="2021-01-01" />
     <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
     <link href="site_libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="site_libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="site_libs/remark-css-0.0.1/ki-fonts.css" rel="stylesheet" />
+    <link href="site_libs/remark-css-0.0.1/duke-blue.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Sesión 4
+# Introducción a R
 ## Aplicaciones a la enseñanza de la Estadística
-### 
+### apoyo a labores de docencia e investigación
 ### Daniel Enrique González Gómez
 ### 2021
 
 ---
 
+## Herramientas de trabajo
+ &lt;img src="img/conque.png" width="900"&gt;
+
+---
+### Es posible hacer todo junto
+ + Hacer la parte escrita
+ + Realizar los procesos de computo - cuadros - graficos - resultados
+ + &lt;img src="img/nocopypaste.png" width="60"&gt;
+ + Actualizarlos documentos con un clik
+ + Replicar los informes
+ 
+ &lt;img src="img/RMarkdownFlow.png" width="600"&gt;
+---
+ &lt;img src="img/rmarkdown_universe.jpg" width="900"&gt;
+ 
+.footnote[[*] Tomado de: https://ulyngs.github.io/rmarkdown-workshop-2019/slides/Day1.html#1 ]
+---
+.pull-left[ 
+# &lt;img src="img/Rmd.jpeg" width="100"&gt;
+
+### Que es 
+&lt;img src="img/queesRmd.png" width="400"&gt;
+]
+
+.pull-right[
+
+### Que podemos hacer 
+&lt;img src="img/quehacerRmd.png" width="400"&gt;
+]
+
+---
+
+# Trabajaremos 
+
+### * Informes
+
+### * Presentaciones
+
+### * Tableros
+
+### * Libros
+---
+&lt;img src="img/Rmd1.png" width="930"&gt;
+---
+&lt;img src="img/Rmd2.png" width="930"&gt;
+---
+## Cuadernos
+
+&lt;img src="img/notebook.png" width="800"&gt;
+
+.footnote[[*] Tomado de: https://rmarkdown.rstudio.com/lesson-10.html]
+
+---
+## Tableros
+
+
+&lt;img src="img/tablero1.png" width="900"&gt;
+
+.footnote[[*] Tomado de: https://beta.rstudioconnect.com/jjallaire/htmlwidgets-highcharter/htmlwidgets-highcharter.html]
+
+---
+## Presentaciones
+&lt;img src="img/xaringan.png" width="1000"&gt;
+
+---
+## Libros - notas de clase
+&lt;img src="img/libro3.jpg" width="300"&gt;
+&lt;img src="img/bookdown.png" width="100"&gt;
+
+.footnote[[*] https://bookdown.org/yihui/bookdown/]
+
+
+---
+Markdown Cheat Sheet
+https://www.markdownguide.org/cheat-sheet/
+
+Guia RMarkdown
+https://markdown-guide.readthedocs.io/en/latest/
+
+R Markdown Cookbook
+Yihui Xie, Christophe Dervieux, Emily Riederer (2020)
+https://bookdown.org/yihui/rmarkdown-cookbook/
+
+R Markdown: The Definitive Guide
+Yihui Xie, J. J. Allaire, Garrett Grolemund (2021)
+https://bookdown.org/yihui/rmarkdown/
+
+bookdown: Authoring Books and Technical Documents with R Markdown
+Yihui Xie (2021)
+https://bookdown.org/yihui/bookdown/
+
+
+flexdashboard
+https://pkgs.rstudio.com/flexdashboard/index.html
+https://www.paulamoraga.com/book-geospatial/sec-dashboardswithshiny.html
+https://www.paulamoraga.com/book-geospatial/sec-flexdashboard.html
+
+
+articulos
+https://bookdown.org/yihui/rmarkdown/rticles-templates.html
+
+presentaciones
+https://rmarkdown.rstudio.com/lesson-11.html
+https://bookdown.org/yihui/rmarkdown/powerpoint-presentation.html # power point
+https://bookdown.org/yihui/rmarkdown/xaringan-preview.html # xaringan
+http://arm.rbind.io/slides/xaringan.html#1   # xaringan
+https://www.kirenz.com/slides/xaringan-demo-slides.html#6
+
+galeria 
+https://rmarkdown.rstudio.com/gallery.html
+
+---
 class: inverse, center, middle
 
-# EN CONSTRUCCION 
-![](img/enconstruccion3.gif)
+# Daniel Enrique Gonzalez Gomez 
+### dgonzalez@javerianacali.edu.co
+
+
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false,
-"ratio": "16:9"
+"highighStyle": "github",
+"highlighLine": true,
+"countIncrementalSlides": true,
+"ratio": "16:9",
+"header-includes": "\\usepackage{pdfpages}"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
@@ -98,24 +215,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
       links[i].target = '_blank';
     }
   }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+})();</script>
 
 <script>
 slideshow._releaseMath = function(el) {
