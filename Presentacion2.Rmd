@@ -1,7 +1,7 @@
 ---
 title: "Introducción a R"
 subtitle: "Aplicaciones a la enseñanza de la Estadística"
-author: "IV - Encuentro Colombiano de Educación Estadística "
+author: "IV - Encuentro Colombiano de Educación Estocástica"
 institute: "Daniel Enrique González Gómez"
 date: "2021-05-31"
 output:
@@ -112,8 +112,9 @@ Datos de iris (de Fisher o Anderson)
 #### Base de datos estudianes Probabilidad y Estadistica 
 
 ```{r, warning=FALSE, message=FALSE}
-bd0052 = read_excel("data/bd0052.xlsx",col_types = c("numeric", "numeric", "text", 
-         "numeric", "text", "numeric"))
+library(readxl)
+bd0052 <- read_excel("data/bd0052.xlsx", col_types = c("numeric", "numeric", "text", "text",
+                                                       "numeric", "text", "numeric"))
 DT::datatable(head(bd0052,81),fillContainer = FALSE, options = list(pageLength = 6))
 ```
 
