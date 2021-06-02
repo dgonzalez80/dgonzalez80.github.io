@@ -935,3 +935,5 @@ class: inverse, center, middle
 
 # Práctica 
 
+https://github.com/dgonzalez80/ACEdEstad2021/blob/main/codigoR/codigo3.R
+
